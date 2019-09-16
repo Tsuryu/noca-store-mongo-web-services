@@ -24,7 +24,6 @@ app.get('/user', (req, res) => {
 });
 
 app.post('/user', (req, res) => {
-  debugger;
   const body = req.body;
 
   const user = new User({
