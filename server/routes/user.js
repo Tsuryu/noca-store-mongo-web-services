@@ -10,6 +10,9 @@ app.get('/user/:id', (req, res) => {
     if (!userDB) return res.status(404).json({ ok: false, err: { message: 'Username or password invalid' } });
     if (!bcrypt.compareSync(req.headers.password, userDB.password)) return res.status(404).json({ ok: false, err: { message: 'Username or password invalid' } });
 
+    res.append('Access-Control-Allow-Origin', ['*']);
+    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.append('Access-Control-Allow-Headers', 'Content-Type');
     res.json({ ok: true, User: userDB });
   });
 });
