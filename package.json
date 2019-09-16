@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/server.js",
-    "debug": "node --nolazy --inspect-brk=9229 ./bin/www ./context/.js  server.js   ./server/.js ./server/**/*.js ./server/**/**/*.js",
+    "debug": "node --nolazy --inspect-brk=9229 server/server.js ./server/.js ./server/**/*.js ./server/**/**/*.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "eslint": "node_modules/.bin/eslint  ./bin/www ./context/*.js server.js ./server/*.js ./server/**/*.js ./server/**/**/*.js --quiet",
     "eslint-w": "node_modules/.bin/esw   ./bin/www ./context/*.js  server.js ./server/*.js ./server/**/*.js ./server/**/**/*.js  -w --quiet",

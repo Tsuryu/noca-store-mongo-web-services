@@ -1,6 +1,6 @@
-import express from 'express';
-import bcrypt from 'bcrypt';
-import User from '../models/user';
+const express = require('express');
+const bcrypt = require('bcrypt');
+const User = require('../models/user');
 
 const app = express();
 
@@ -24,6 +24,7 @@ app.get('/user', (req, res) => {
 });
 
 app.post('/user', (req, res) => {
+  debugger;
   const body = req.body;
 
   const user = new User({
