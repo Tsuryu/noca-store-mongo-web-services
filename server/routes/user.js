@@ -5,12 +5,10 @@ const User = require('../models/user');
 const app = express();
 
 app.get('/user/:id', (req, res) => {
-  const body = { ...req.headers, username: req.query.id };
-
-  User.findOne({ body }, (err, userDB) => {
+  User.findOne({ username: req.params.id }, (err, userDB) => {
     if (err) return res.status(500).json({ ok: false, err });
     if (!userDB) return res.status(404).json({ ok: false, err: { message: 'Username or password invalid' } });
-    if (bcrypt.compareSync(body.password, userDB.password)) return res.status(404).json({ ok: false, err: { message: 'Username or password invalid' } });
+    if (!bcrypt.compareSync(req.headers.password, userDB.password)) return res.status(404).json({ ok: false, err: { message: 'Username or password invalid' } });
 
     res.json({ ok: true, User: userDB });
   });
