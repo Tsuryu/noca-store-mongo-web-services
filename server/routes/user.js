@@ -5,14 +5,15 @@ const User = require('../models/user');
 const app = express();
 
 app.get('/user/:id', (req, res) => {
+  if (!req.headers.password) {
+    return res.status(404).json({ ok: false, err: { message: 'Password invalid' } });
+  }
+
   User.findOne({ username: req.params.id }, (err, userDB) => {
     if (err) return res.status(500).json({ ok: false, err });
     if (!userDB) return res.status(404).json({ ok: false, err: { message: 'Username or password invalid' } });
     if (!bcrypt.compareSync(req.headers.password, userDB.password)) return res.status(404).json({ ok: false, err: { message: 'Username or password invalid' } });
 
-    res.append('Access-Control-Allow-Origin', ['*']);
-    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.append('Access-Control-Allow-Headers', 'Content-Type');
     res.json({ ok: true, User: userDB });
   });
 });
