@@ -20,11 +20,17 @@ app.use(express.static(path.resolve(__dirname, '../public')));
 // configuracion global de las rutas
 app.use(require('./routes/index'));
 
-mongoose.connect(process.env.URLDB, { useNewUrlParser: true, useCreateIndex: true }, (err, res) => {
-  if (err) throw err;
-
-  console.log('Base da datos ONLINE');
-});
+var connectWithRetry = function() {
+  return mongoose.connect(process.env.URLDB, { useNewUrlParser: true, useCreateIndex: true }, function(err) {
+      if (err) {
+          console.error('Failed to connect to mongo on startup - retrying in 1 sec', err);
+          setTimeout(connectWithRetry, 1000);
+      } else {
+        console.log('Base da datos ONLINE');
+      }
+  });
+};
+connectWithRetry();
 // mongoose.set('useCreateIndex', true);
 
 app.listen(process.env.PORT, () => console.log('escuchando puerto', process.env.PORT));

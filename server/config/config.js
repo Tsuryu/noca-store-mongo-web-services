@@ -3,10 +3,10 @@
 process.env.PORT = process.env.PORT || 3005;
 
 // ENTORNO
-process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
+process.env.NODE_ENV = process.env.NODE_ENV || 'local';
 
 // BASE DE DATOS
-const urlDB = process.env.NODE_ENV === 'local' ? 'mongodb://localhost:27017/unlz' : process.env.MONGO_URI;
+const urlDB = process.env.NODE_ENV === 'local' ? 'mongodb://root:example@localhost:27018/unlz?authSource=admin' : process.env.MONGO_URI;
 process.env.URLDB = urlDB;
 
 // TOKEN - AUTENTICACION
