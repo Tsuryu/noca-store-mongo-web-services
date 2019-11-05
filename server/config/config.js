@@ -1,6 +1,6 @@
 // PUERTO
 // eslint-disable-next-line jsx-a11y/href-no-hash
-process.env.PORT = process.env.PORT || 3006;
+process.env.PORT = process.env.PORT || 3005;
 
 // ENTORNO
 process.env.NODE_ENV = process.env.NODE_ENV || 'local';

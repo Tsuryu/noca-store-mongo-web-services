@@ -10,7 +10,7 @@ services:
       dockerfile: "Dockerfile"
     image: noca-mongo
     ports:
-     - '3006:3005'
+     - '3005:3005'
     environment:
       MONGO_URI: 'mongodb://root:example@mongo:27017/unlz?authSource=admin'
       NODE_ENV: docker
